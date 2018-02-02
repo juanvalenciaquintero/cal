@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Calculadora</title>
+
+<style type="text/css">
+#calculadora {
+	width:350px;
+	height:180px;
+	border:2px solid black;
+	background-color:#9F9999;
+	padding: 20px;
+	border-radius:20px
+	}
+
+button {
+	border:1px solid #000000;
+	}
+
+#factorial, #potencia, #igual, #productoN {
+	margin-right: 15px;	
+}
+
+	
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+
+var numero, operacion="", acumulado = 0;
+
+$(function() {
+     $("#cifra").on("click", 
+      function(){ $("#cifra").val("");
+	  numero = $("#cifra");
+	  }	   
+    );
+	
+	$("#cuadrado").on("click", 
+	function() { 
+		
+		numero.val(numero.val()*numero.val());
+	} );
+	
+	$("#inverso").on("click",
+	function() {
+		numero.val(1/numero.val());
+		} );
+	
+	$("#raiz").on("click", 
+	function() {
+		numero.val(Math.sqrt(numero.val()));
+		});
+		
+	$("#entero").on("click",
+	function() {
+		if (numero.val() >= 0) {
+			numero.val(Math.floor(numero.val()));
+			}
+		else {
+			numero.val(Math.ceil(numero.val()));
+			}
+		});
+		
+	$("#potencia2").on("click", 
+	function() {
+		var potencia = numero.val();
+		var res = 1;
+		for (x=0; x<potencia;x++)
+		{
+		 res = res*2;
+		}
+		numero.val(res);
+		});
+		
+	$("#factorial").on("click", 
+	function() {
+		var factor = numero.val();
+		var res = factor;
+		for (x=factor;x>1;x--){
+			res = res*(x-1);
+		}
+		numero.val(res);
+		});
+		
+	$("#suma").on("click", 
+	function() {
+		acumulado = numero.val();
+		operacion = "+";
+		});
+		
+		$("#resta").on("click", 
+	function() {
+		acumulado = numero.val();
+		operacion = "-";
+		});
+	
+	$("#multiplicacion").on("click", 
+	function() {
+		acumulado = numero.val();
+		operacion = "*";
+		});
+		
+	$("#division").on("click", 
+	function() {
+		acumulado = numero.val();
+		operacion = "/";
+		});
+		
+	$("#potencia").on("click", 
+	function() {
+		acumulado = numero.val();
+		operacion = "^";
+		});
+	
+	$("#igual").on("click", 
+	function() {
+		if (operacion === "+") { numero.val(+acumulado + +numero.val())};
+		if (operacion === "-") { numero.val(+acumulado - +numero.val())};
+		if (operacion === "*") { numero.val(+acumulado * +numero.val())};
+		if (operacion === "/") { numero.val(+acumulado / +numero.val())};
+		if (operacion === "^") { numero.val(Math.pow(+acumulado,+numero.val()))};
+		});
+		
+	$("#sumatorio").on("click", 
+	function() {
+		var resultado = 0;
+		var lista = numero.val().split(",");
+		for (x = 0; x<lista.length; x++) {
+			resultado = resultado + +lista[x];
+			};
+			numero.val(resultado);
+		});
+		
+	$("#productoN").on("click", 
+	function() {
+		var lista = numero.val().split(",");
+		var resultado = lista[0];
+		for (x = 1; x<lista.length; x++) {
+			resultado = resultado * +lista[x];
+			};
+			numero.val(resultado);
+		});
+	
+} );
+	
+
+		
+</script>
+</head>
+
+<body>
+<h1>Buenos días. Bienvenido a la calculadora de Juan Antonio Valencia</h1>
+<div id="calculadora">
+Número: 
+<input type="text" id="cifra"><p>
+<button id="cuadrado" style='width:25px; height:27px'>X<sup>2</sup></button>
+<button id="inverso" style='height:25px'>1/X</button>
+<button id="raiz" style='height:25px'>√</button>
+<button id="entero" style='height:25px'>P.Entera</button>
+<button id="potencia2" style='height:25px'>2^n</button>
+<button id="factorial" style='height:25px'>n!</button>Un operando<p>
+<button id="suma" style='height:25px'>+</button>
+<button id="resta" style='height:25px'>-</button>
+<button id="multiplicacion" style='height:25px'>*</button>
+<button id="division" style='height:25px'>/</button>
+<button id="potencia" style='height:27px'>X<sup>y</sup></button>
+<button id="igual" style='height:25px'>=</button>Dos operandos<p>
+<button id="sumatorio" style='height:25px'>∑</button>
+<button id="productoN" style='height:25px'>*N</button>N operandos separados por comas<p>
+
+</div>
+</body>
+</html>
